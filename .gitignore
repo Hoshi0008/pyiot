@@ -1,0 +1,8 @@
+*.pdf
+main.py
+*.pyc
+
+.vscode/
+.idea/
+.venv/
+.env/
