@@ -2,7 +2,9 @@
 main.py
 *.pyc
 
+__pycache__/
 .vscode/
 .idea/
 .venv/
 .env/
+docs/
