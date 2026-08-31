@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
 
-def dsl_parser(raw: bytes, definition: str, constraints: list, assignments: list, mapping: tuple | list,
-               endian: bool = True) -> dict | None:
+def dsl_parser(raw: bytes, definition: str, constraints: tuple[str, ...], assignments: tuple[str, ...],
+               mapping: tuple[str, ...],
+               endian: bool = True) -> (dict, int):
     mapping_table: dict = {}
     assignments_table: dict = {}
     raw_p: int = 0
@@ -91,11 +92,14 @@ def dsl_parser(raw: bytes, definition: str, constraints: list, assignments: list
                 raise ValueError("The number in {} cannot below 0!")
             ele_p += 1
 
+        elif definition[def_p].isspace():
+            raw_p += 1
+
         else:
             raise ValueError(f"Unknown character '{definition[def_p]}'")
 
-    if raw_p != raw_sz:
-        return None
+    #if raw_p != raw_sz:
+    #    return None
 
     if mapping_table:
         for key in mapping_table.keys():
@@ -105,4 +109,4 @@ def dsl_parser(raw: bytes, definition: str, constraints: list, assignments: list
                 else:
                     mapping_table[key] = list(mapping_table[key])
 
-    return mapping_table
+    return mapping_table, raw_p

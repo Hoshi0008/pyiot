@@ -7,8 +7,9 @@
 ## dsl_parser
 
 ```python
-def dsl_parser(raw: bytes, definition: str, constraints: list, assignments: list,
-               mapping: tuple | list, endian: bool = True) -> dict | None
+def dsl_parser(raw: bytes, definition: str, constraints: tuple[str, ...], assignments: tuple[str, ...],
+               mapping: tuple[str, ...],
+               endian: bool = True) -> (dict, int):
 ```
 
 ### 参数
@@ -17,9 +18,9 @@ def dsl_parser(raw: bytes, definition: str, constraints: list, assignments: list
 |---|---|---|
 | `raw` | `bytes` | 待解析的原始字节数据 |
 | `definition` | `str` | DSL 结构定义字符串，描述帧中每个字段的类型与重复次数，语法见 [DSL 语法参考](DSL.md) |
-| `constraints` | `list` | 约束表达式列表，每个元素为字符串表达式，在 `raw` 与 `sum` 环境下求值；任一结果为假则解析失败返回 `None`（典型用法：校验和校验） |
-| `assignments` | `list` | 赋值表达式列表，形式为 `name=表达式`（如 `n=raw[3]-1`），在 `raw` 与 `sum` 环境下求值，结果供 `definition` 中的 `{name}` 重复计数使用 |
-| `mapping` | `tuple \| list` | 字段名列表，按顺序对应 `definition` 中的每个元素（常量段与类型段各占一个名字） |
+| `constraints` | `tuple[str, ...]` | 约束表达式列表，每个元素为字符串表达式，在 `raw` 与 `sum` 环境下求值；任一结果为假则解析失败返回 `None`（典型用法：校验和校验） |
+| `assignments` | `tuple[str, ...]` | 赋值表达式列表，形式为 `name=表达式`（如 `n=raw[3]-1`），在 `raw` 与 `sum` 环境下求值，结果供 `definition` 中的 `{name}` 重复计数使用 |
+| `mapping` | `tuple[str, ...]` | 字段名列表，按顺序对应 `definition` 中的每个元素（常量段与类型段各占一个名字） |
 | `endian` | `bool` | 字节序：`True`（默认）为大端，`False` 为小端，影响多字节字段的整数值转换 |
 
 ### 返回值
