@@ -1,31 +1,8 @@
 # -*- coding: utf-8 -*-
 
-"""
-definition examples:
-    B{4} match 4 bytes
-    (0x00,0xff)BW{2} match 0x00 0xff then a byte then 2 words
-    BBB{n} math 2 bytes then match n bytes, n must be given is assignments
-
-constraints examples:
-    (raw[2]+raw[3])&0xff==0 checksum
-
-assignments examples:
-    n=raw[2]
-    n=(raw[2]<<2)+raw[3]
-"""
-
 
 def dsl_parser(raw: bytes, definition: str, constraints: list, assignments: list, mapping: tuple | list,
                endian: bool = True) -> dict | None:
-    """
-    :param raw: raw data bytes
-    :param definition: above
-    :param constraints: above
-    :param assignments: above
-    :param mapping: above
-    :param endian: True if is big endian, else False
-    :return:
-    """
     mapping_table: dict = {}
     assignments_table: dict = {}
     raw_p: int = 0

@@ -7,4 +7,5 @@ __pycache__/
 .idea/
 .venv/
 .env/
-docs/
+docs/device/
+docs/main.md
