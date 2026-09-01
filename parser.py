@@ -93,12 +93,12 @@ def dsl_parser(raw: bytes, definition: str, constraints: tuple[str, ...], assign
             ele_p += 1
 
         elif definition[def_p].isspace():
-            raw_p += 1
+            def_p += 1
 
         else:
             raise ValueError(f"Unknown character '{definition[def_p]}'")
 
-    #if raw_p != raw_sz:
+    # if raw_p != raw_sz:
     #    return None
 
     if mapping_table:
